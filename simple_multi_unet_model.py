@@ -7,6 +7,7 @@ easy to test various loss functions and optimizers.
 
 
 from keras.models import Model
+from keras.metrics import Mean
 from keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D, concatenate, Conv2DTranspose, BatchNormalization, Dropout, Lambda
 from keras import backend as K
 import tensorflow as tf
@@ -82,7 +83,8 @@ def multi_unet_model(n_classes=4, IMG_HEIGHT=256, IMG_WIDTH=256, IMG_CHANNELS=1)
     c9 = Dropout(0.2)(c9)  # Original 0.1
     c9 = Conv2D(16, (3, 3), activation='relu', kernel_initializer='he_normal', padding='same')(c9)
      
-    outputs = Conv2D(n_classes, (1, 1), activation='softmax')(c9)
+    #Su sigmoid nieko nesimoko
+    outputs = Conv2D(n_classes, (1, 1), activation='softmax')(c9) 
      
     model = Model(inputs=[inputs], outputs=[outputs])
     
